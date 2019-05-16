@@ -1,0 +1,96 @@
+﻿@model IEnumerable<WebLinhkien.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div class="col-md-12 mt-5">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product_Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descriptions)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parameter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quanlity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdates)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Datesupdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.viewcount)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product_Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="~/Content/img/@Html.DisplayFor(modelItem => item.Image)" alt="@item.Name" style="width:150px;height:150px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descriptions)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quanlity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createdates)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datesupdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.viewcount)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    </div>

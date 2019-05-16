@@ -1,0 +1,108 @@
+﻿@model WebLinhkien.Models.Products
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="col-md-12 mt-5">
+    <div>
+        <h4>Products</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Product_Code)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product_Code)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Image)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Descriptions)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descriptions)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Parameter)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Parameter)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Quanlity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Quanlity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Hot)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Hot)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Createdates)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Createdates)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Datesupdate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Datesupdate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.viewcount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.viewcount)
+            </dd>
+
+        </dl>
+    </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

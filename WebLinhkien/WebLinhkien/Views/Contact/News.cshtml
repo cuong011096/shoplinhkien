@@ -1,0 +1,58 @@
+﻿@model IEnumerable<WebLinhkien.Models.Blog>
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var home = (IEnumerable<WebLinhkien.Models.Blog>)ViewBag.home;
+}
+
+<div class="container">
+   
+    <h5>
+        <section class="clearfix">
+
+            <section class="breadcrumbs clearfix">
+                @Html.ActionLink("Trang chủ", "Index", "Home", null, null)
+
+                &nbsp;&nbsp;&gt;&nbsp;&nbsp;
+                @Html.ActionLink("Tin tức", "News", "Contact", null, null)
+            </section>
+
+        </section>
+    </h5>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-md-12">
+
+
+                @foreach (var a in home)
+                {
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <article>
+                            <div>
+                                <h3>
+                                    &nbsp; @a.Title
+                                    @Html.ActionLink("Đọc thêm", "DetailBlogs", "Contact", new { id = a.ID }, new { @class = "btn btn-blog pull-right" })
+                                </h3>
+                            </div>
+                            <a href="#">
+                                <img src="~/Content/img/@a.image1" alt="@a.Title" class="pull-left imgnew p-2 img-responsive">
+                            </a>
+                            <em>
+                                Tags
+                                <a href="/Products/Category?CategoryID=1" target="_blank">@a.Type</a>
+                            </em>
+
+                            <p>
+                                @a.HeadBlog
+                            </p>
+                        </article>
+                    </div>
+                </div>
+                        }
+
+        </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/js/jquery-2.2.3.min.js"></script>

@@ -1,0 +1,77 @@
+﻿@model WebLinhkien.Models.Orders
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Checkout</h2>
+
+<h3>Thông Tin Khách Hàng</h3>
+
+@using (Html.BeginForm("Purchase", "Order"))
+{
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Tên tài khoản</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.CustomerId, new { @class = "form-control" })
+      
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Ngày đặt hàng</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.OrderDate, new { @class = "form-control" })
+        </div>
+    </div>
+
+  
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Tên người nhận</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Receiver, new { @class = "form-control" })
+        
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Địa chỉ</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+           
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Tổng tiền</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Amount, new { @class = "form-control", @readonly = "true" })
+         
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <label class="control-label col-md-2">Số tài khoản</label>
+        <div class="col-md-10">
+            @Html.TextBox("BankAccount", null, new { @class = "form-control" })
+        </div>
+    </div>*@
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Mô tả</label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Descriptions, new { @class = "form-control", rows = "5" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Đặt Hàng" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}

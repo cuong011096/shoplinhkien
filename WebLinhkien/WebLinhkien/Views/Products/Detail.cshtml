@@ -1,0 +1,324 @@
+﻿@model WebLinhkien.Models.Products
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@try
+{
+
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <div class="pro-img-details wm-zoom-container my-zoom">
+                        <div class="wm-zoom-box">
+                            <img src="/Content/img/@Html.DisplayFor(a => a.Image)" id="imgzoom" alt="@Html.DisplayFor(a => a.Name)" class="wm-zoom-default-img" data-hight-src="/Content/img/@Html.DisplayFor(a => a.Image)" data-loader-src="/Content/img/loader.gif">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="pro-d-title">
+                        <a href="#" class="nameproduct" style="font-size:26px;">
+                            @Html.DisplayFor(a => a.Name)
+                        </a>
+                    </h4>
+                    <hr />
+
+
+                    <div class="">
+
+                        <div class="">
+                            <span>Lượt xem : @Html.DisplayFor(a => a.viewcount)</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        @if (Model.Quanlity < 1)
+                        {
+                            <strong>Số lượng : </strong>
+
+                            <span class="text-danger">
+                                <i class="fa fa-times-circle"></i> Đã hết hàng
+                            </span>
+                        }
+                        else
+                        {
+                            <strong>Số lượng : </strong>
+                            <span>@Html.DisplayFor(a => a.Quanlity)</span>
+                            <span class="text-success">
+                                <i class="fa fa-check-circle"></i> Còn hàng
+                            </span>
+                        }
+
+                    </div>
+                    <br>
+                    <div class="m-bot15">
+                        <strong>Price : </strong>
+                        <span class="new-price">@string.Format("{0:0,0 VNĐ}", Model.Price).Replace(",", ".")</span>
+
+                    </div>
+                    <br>
+                    <div>
+                        <label>Quantity : </label>
+                        <br>
+                        @if (Model.Quanlity < 1)
+                        {
+                            <div class="form-group">
+
+
+                                <button type="button" disabled class="btn btn-xs btn-default btn-number sub">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+
+                                <input type="text" name="qty" class="text-center input-number" disabled value="0">
+
+                                <button type="button" disabled class="btn btn-xs btn-default btn-number add">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="btn btn-round btn-danger add-to-cart" disabled type="button">
+                                    <i class="fa fa-shopping-cart"> Đã hết hàng</i>
+                                </button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+
+
+                                <button type="button" class="btn btn-xs btn-default btn-number sub">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </button>
+
+                                <input type="text" name="quatity" id="quantity" class="text-center input-number qty" value="1" min="1" max="@Model.Quanlity">
+
+                                <button type="button" class="btn btn-xs btn-default btn-number add">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+
+
+                            </div>
+                            <div>
+                                <button class="btn btn-round btn-success add-to-cart-quantity" type="button" data-id="@Model.ID" data-name="@Model.Name" data-quantity="@Model.Quanlity">
+                                    <i class="fa fa-shopping-cart"> Thêm vào giỏ</i>
+                                </button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a data-toggle="tab" href="#home">Mô tả</a>
+    </li>
+    <li>
+        <a data-toggle="tab" href="#menu1"> Xem thông tin chi tiết</a>
+    </li>
+
+    <li>
+        <a data-toggle="tab" href="#menu2">Comments</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <h3>Mô tả</h3>
+        <span style="white-space: pre-line">
+            @*@Html.DisplayFor(a=>a.Descriptions)*@
+            @string.Format("{0:.}", Model.Descriptions).Replace(".", "\n - \t  ")
+        </span>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+        <h3>Xem thông tin chi tiết</h3>
+        <span style="white-space: pre-line">
+            @*@Html.DisplayFor(a => a.LivingEnvironment)*@
+            @*@string.Format("{0:.}", Model.LivingEnvironment).Replace(".", "\n - \t  ")*@
+
+            <table class="table table-hover table-striped">
+                <tr>
+                    <td>
+                        Mã sản phẩm:
+                    </td>
+                    <td>
+                        @Model.ID
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tên sản phẩm:
+                    </td>
+                    <td>
+                        @Model.Name
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Danh mục:
+                    </td>
+                    <td>
+                        @try
+                        {
+                            @Model.Categories.Name;
+                        }catch{}
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Ngày nhập hàng:
+                    </td>
+                    <td>
+                        @Model.Createdates
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Nhà cung cấp:
+                    </td>
+                    <td>
+                        @try{ 
+                        @Model.Suppliers.Name
+                        }catch{}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Lượt xem
+                    </td>
+                    <td>
+                        @Model.viewcount
+                    </td>
+                </tr>
+            </table>
+
+        </span>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+        <h3>Comments</h3>
+          </div>
+</div>
+<hr>
+
+<div class="row mt-5">
+
+    <div class="container border-1">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 col-xl-12">
+            <h2 class="list-product-title">Một số sản phẩm khác</h2>
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="product-group">
+            <div class="row">
+                @foreach (var s in Model.Categories.Products.OrderBy(p => Guid.NewGuid()).Skip(1).Take(4))
+                {
+                    <div class="col-md-3 col-sm-6 col-12">
+                        <div class="card card-product mb-3">
+                            <img class="card-img-top imgfeet" src="~/Content/img/@s.Image" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title product-title" title="@s.Name">@s.Name</h5>
+                                <div class="card-text product-price">
+                                    <span class="new-price">@string.Format("{0:0,0 VNĐ}", s.Price).Replace(",", ".")</span>
+                                </div>
+                                <div style="text-align: center">
+                                    <a class="btn btn-info add-to-cart" data-id="@s.ID" data-name="@s.Name">
+                                        <i class="fas fa-shopping-cart"> Thêm vào giỏ</i>
+                                    </a>
+                                    @Html.ActionLink("Xem chi tiết", "Detail", "Products", new { id = s.ID }, new { @class = "btn btn-info btn-detail" })
+                                </div>
+                                <h3 class="hot-sticky">New</h3>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div><hr>
+
+
+
+}
+catch { }
+
+
+<script src="~/Content/js/jquery-2.2.3.min.js"></script>
+
+<script src="~/Content/js/jquery.wm-zoom-1.0.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.my-zoom').WMZoom({
+            config: {
+                inner: false,
+                stageW: 500,
+                stageH: 400,
+                margin: 10
+            }
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $(".add-to-cart").click(function () {
+            pid = $(this).attr("data-id");
+            name = $(this).attr("data-name");
+            $.ajax({
+                url: "/Cart/Add",
+                data: { id: pid, name },
+                success: function (response) {
+                    $("#nn-cart-count").html(response.Count);
+                    $("#nn-cart-total").html(response.Total);
+                    toastr.error('Đã thêm ' + name + ' vào giỏ hàng', 'Thông báo')
+                }
+            });
+        });
+        $(".add-to-cart-quantity").click(function () {
+            pid = $(this).attr("data-id");
+            name = $(this).attr("data-name");
+            //qty = $(this).val();
+            qqq = $(this).attr("data-quantity");
+            qty = $(this).val();
+            $.ajax({
+                url: "/Cart/Addwithquantity?quantity=" + $("#quantity").val(),
+
+                data: { id: pid, name, quantity: qty },
+                success: function (response) {
+                    qty = qqq;
+                    $("#nn-cart-count").html(response.Count);
+                    $("#nn-cart-total").html(response.Total);
+
+                    toastr.error('Đã thêm ' + name + ' vào giỏ hàng', 'Thông báo');
+                    return data;
+                }
+            });
+        });
+        $('.add').click(function () {
+            if ($(this).prev().val() < 10) {
+                $(this).prev().val(+$(this).prev().val() + 1);
+            }
+        });
+        $('.sub').click(function () {
+            if ($(this).next().val() > 0) {
+                $(this).next().val(+$(this).next().val() - 1);
+            }
+        });
+
+    });
+</script>

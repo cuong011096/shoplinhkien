@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebLinhkien.Models.Products>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="glyphicon glyphicon-list"></i><span> DANH MỤC SẢN PHẨM</span></div>
+            <div class="panel-body">
+                @{
+                    Html.RenderAction("Category", "Home");
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        @foreach (var a in Model)
+        {
+
+            <div class="col-md-4">
+
+                <div class="thumbnail">
+
+                    <img src="~/Content/img/@a.Image" alt="@a.Name" class="img-responsive imgfeet">
+                    <div class="caption">
+                        <h5 class="card-title product-title nameproduct">@a.Name</h5>
+
+                        <div class="card-text product-price">
+                            <span class="new-price">@string.Format("{0:0,0 VNĐ}", a.Price).Replace(",", ".")</span>
+                        </div>
+                        <div style="text-align: center">
+                            <a class="btn btn-info add-to-cart" data-id="@a.ID" data-name="@a.Name">
+                                <i class="fas fa-shopping-cart"> Thêm vào giỏ</i>
+                            </a>
+                            @Html.ActionLink("Xem chi tiết", "Detail", "Products", new { id = a.ID }, new { @class = "btn btn-outline-info btn-detail" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".add-to-cart").click(function () {
+            pid = $(this).attr("data-id");
+            name = $(this).attr("data-name");
+            $.ajax({
+                url: "/Cart/Add",
+                data: { id: pid, name },
+                success: function (response) {
+                    $("#nn-cart-count").html(response.Count);
+                    $("#nn-cart-total").html(response.Total);
+                    toastr.error('Đã thêm ' + name + ' vào giỏ hàng', 'Thông báo')
+                }
+            });
+
+
+        });
+    });
+</script>

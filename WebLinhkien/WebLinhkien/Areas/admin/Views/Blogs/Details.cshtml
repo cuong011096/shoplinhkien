@@ -1,0 +1,76 @@
+﻿@model WebLinhkien.Models.Blog
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div class="col-md-12 mt-5">
+    <div>
+        <h4>Blog</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HeadBlog)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HeadBlog)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BodyBlog)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BodyBlog)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.image1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.image1)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FootBlog)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FootBlog)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateDay)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDay)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+
+        </dl>
+    </div>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

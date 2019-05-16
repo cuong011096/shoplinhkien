@@ -1,0 +1,105 @@
+﻿@model IEnumerable<WebLinhkien.Models.Categories>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading"><i class="glyphicon glyphicon-list"></i><span> DANH MỤC SẢN PHẨM</span></div>
+            <div class="panel-body">
+                @{
+                    Html.RenderAction("Category", "Home");
+                }
+            </div>
+        </div>
+
+    </div>
+    <div class="col-md-9">
+        @{Html.RenderAction("Carouse", "Home"); }
+        @foreach (var c in Model)
+        {
+            var items = c.Products
+                .OrderBy(p => Guid.NewGuid())
+                .ToList()
+                .Take(3);
+            <div class="nn-block-margin-top30px">
+                <div class="nn-cat-title">
+
+                    <a href="/Products/Category?CategoryID=@c.ID"><span style="font-size:20px">@c.Name</span></a>
+
+                </div>
+                <br />
+                <div>
+                    @foreach (var p in items)
+                    {
+                        <div class="col-md-4">
+                            <div class="card card-product mb-3">
+                                <img class="card-img-top imgfeet nn-cart-image" src="~/Content/img/@p.Image" alt="@p.Name">
+                                <div class="card-body">
+                                    <h5 class="card-title product-title nameproduct">@p.Name</h5>
+                                    <div class="card-text product-price">
+                                        <span class="new-price">@string.Format("{0:0,0 VNĐ}", p.Price).Replace(",", ".")</span>
+                                    </div>
+                                    <div style="text-align: center">
+                                        @if (p.Quanlity < 1)
+                                        {
+                                            <a class="btn btn-info add-to-cart toast toast-error">
+                                                <i class="fas fa-shopping-cart"> Hết hàng</i>
+                                            </a>
+                                            @Html.ActionLink("Xem chi tiết", "Detail", "Products", new { id = p.ID }, new { @class = "btn btn-outline-info btn-detail nn-view-detail" })
+
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-info add-to-cart" data-id="@p.ID" data-name="@p.Name" data-quantity="@p.Quanlity">
+                                                <i class="fas fa-shopping-cart"> Thêm vào giỏ</i>
+                                            </a>
+                                            @Html.ActionLink("Xem chi tiết", "Detail", "Products", new { id = p.ID }, new { @class = "btn btn-outline-info btn-detail nn-view-detail" })
+
+                                        }
+                                    </div>
+                                    <h3 class="hot-sticky">@p.Hot</h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div><a class="pull-right alert-link" href="/Products/Category?CategoryID=@c.ID"><h6>Xem thêm...</h6></a></div>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+        }
+    </div>
+</div>
+
+
+<script src="~/Content/js/jquery-2.2.3.min.js"></script>
+<script>
+    $(function () {
+        $(".add-to-cart").click(function () {
+            pid = $(this).attr("data-id");
+            name = $(this).attr("data-name");
+            $.ajax({
+                url: "/Cart/Add",
+                data: { id: pid, name },
+                success: function (response) {
+                    $("#nn-cart-count").html(response.Count);
+                    $("#nn-cart-total").html(response.Total);
+                    toastr.error('Đã thêm ' + name + ' vào giỏ hàng', 'Thông báo');
+
+                }
+
+            });
+
+            // hieu ung bay vao gio
+
+        });
+
+
+
+    });
+</script>
